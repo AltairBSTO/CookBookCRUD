@@ -1,5 +1,6 @@
 package com.cookbook;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,7 @@ import baseDeDatos.RecetasDbHelper;
 public class AgregarRecetasCrud extends AppCompatActivity {
 
     private EditText etNombreReceta, etIngredientes, etInstrucciones;
-    private Button btnGuardar, btnActualizar, btnEliminar;
+    private Button btnGuardar, btnActualizar, btnEliminar,btnvolver;
     private RecetasDbHelper dbHelper;
 
     @Override
@@ -26,7 +27,7 @@ public class AgregarRecetasCrud extends AppCompatActivity {
         btnGuardar = findViewById(R.id.btnGuardar);
         btnActualizar = findViewById(R.id.Actualizar);
         btnEliminar = findViewById(R.id.btnEliminar);
-
+        btnvolver = findViewById(R.id.btnvolver);
         dbHelper = new RecetasDbHelper(this);
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +50,16 @@ public class AgregarRecetasCrud extends AppCompatActivity {
                 eliminarReceta();
             }
         });
+
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AgregarRecetasCrud.this, RecipesActivity.class);
+                startActivity(intent);  // Inicia RecipeActivity con los datos actualizados
+                finish();               // Finaliza la actividad actual
+            }
+        });
+
     }
 
     private void agregarReceta() {
